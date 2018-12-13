@@ -48,3 +48,6 @@ to these library directories.
 You may wish to create a new `site_specific.mk` configuration file 
 from this updated configuration template file.
 
+# About this distribution
+This fork is intended to maintain customisations to original Ferret distribution
+done within MPI-C. In case of any questions, contact Sergey Gromov (over GitHub)
