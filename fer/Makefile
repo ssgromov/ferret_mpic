@@ -111,7 +111,7 @@ ncdf4:
 	$(MAKE) "CFLAGS=$(CFLAGS) $(OPT_FLAGS)" \
 		"FFLAGS=$(FFLAGS) $(OPT_FLAGS)" \
 		"PPLUS_FFLAGS = $(PPLUS_FFLAGS) $(PPLUS_OPT_FLAGS)" \
-		"DEBUG_TITLE = optimized" \
+		"DEBUG_TITLE = mpic" \
 		"GUI_FAKES=special/gui_fakes.o" \
 		build
 
