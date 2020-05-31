@@ -1,4 +1,4 @@
-#!/bin/tcsh
+#!/bin/tcsh -f
 
 module purge
 
@@ -11,7 +11,7 @@ switch ($dom)
     module load netcdf/4.6.2
     breaksw
   case hpc.dkrz.de:
-    module load gcc/6.4.0
+    module load gcc
     breaksw
   default:
     echo "unknown domain"

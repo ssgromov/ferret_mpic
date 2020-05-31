@@ -5,3 +5,6 @@
 site_specific.mk
 /dylibs/
 /bench/.ferret
+
+*.gksfont
+xgks/**
