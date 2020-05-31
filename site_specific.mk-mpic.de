@@ -28,7 +28,7 @@ BUILDTYPE = x86_64-linux
 # INSTALL_FER_DIR = $(HOME)/ferret_distributions/rhel6_64
 # INSTALL_FER_DIR = $(HOME)/Ferret
 # INSTALL_FER_DIR = $(FER_DIR)
-INSTALL_FER_DIR = $(SOFT)/ferret/7.44_mpic
+INSTALL_FER_DIR = $(SOFT)/ferret/7.60b_mpic
 
 ## =========================
 ## Directory containing the HDF5 static libraries.
