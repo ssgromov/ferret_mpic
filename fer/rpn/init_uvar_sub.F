@@ -221,7 +221,7 @@ cc     .                                  name, LEN(name))
 #endif
 	   ENDIF
 	ENDDO
-	IF (toolong) uvar_text(uvar)(uvar_text_len-2:uvar_text_len) = '...'
+	IF (toolong) uvar_text(uvar)(uvar_text_len-2:) = '...'
 
 * (7/98) end of quote-sensitive case changing loop
 
