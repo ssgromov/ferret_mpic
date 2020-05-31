@@ -1,0 +1,150 @@
+#
+# platform_specific.mk.x86_64-linux
+#
+# This file is included in other Makefiles and defines platform specific macros.
+# Should not contain any relative directories (other than .) since these Makefiles
+# exist at various levels in the directory tree.
+
+# Extended regular expressions flag for sed (used with cleaning up run_tests results)
+	SED_EXTREGEX_FLAG = -r
+
+# If READLINE_LIBDIR is given, -I$(READLINE_LIBDIR)/../include must be the first
+# include flag (other than .) so the correct readline include files are used.
+ifneq ($(strip $(READLINE_LIBDIR)),)
+	MYINCLUDES	= -I. \
+			  -I$(READLINE_LIBDIR)/../include \
+			  -I$(NETCDF_LIBDIR)/../include \
+			  -I$(DIR_PREFIX)/fer/common \
+			  -I$(DIR_PREFIX)/fmt/cmn \
+			  -I$(DIR_PREFIX)/ppl/tmap_inc \
+			  -I$(DIR_PREFIX)/ppl/include \
+			  -I$(DIR_PREFIX)/xgks/src/lib \
+			  -I$(DIR_PREFIX)/xgks/port
+else
+	MYINCLUDES	= -I. \
+			  -I$(NETCDF_LIBDIR)/../include \
+			  -I$(DIR_PREFIX)/fer/common \
+			  -I$(DIR_PREFIX)/fmt/cmn \
+			  -I$(DIR_PREFIX)/ppl/tmap_inc \
+			  -I$(DIR_PREFIX)/ppl/include \
+			  -I$(DIR_PREFIX)/xgks/src/lib \
+			  -I$(DIR_PREFIX)/xgks/port
+endif
+
+	MYDEFINES	= -Dcrptd_cat_argument \
+			  -Ddouble_p \
+			  -Dgfortran \
+			  -Dreclen_in_bytes  \
+			  -Dunix \
+			  -Dxgks \
+			  -DG77 \
+			  -DG77_SIGNAL \
+			  -DINTERNAL_READ_FORMAT_BUG \
+			  -DMANDATORY_FORMAT_WIDTHS \
+			  -DNEED_IAND \
+			  -DNO_DOUBLE_ESCAPE_SLASH \
+			  -DNO_OPEN_CARRIAGECONTROL \
+			  -DNO_OPEN_SHARED \
+			  -DNO_OPEN_READONLY \
+			  -DNO_OPEN_RECORDTYPE \
+			  -DNO_PASSED_CONCAT \
+			  -DNO_PREPEND_STRING \
+			  -DSTAR_1_SUPPORTED \
+			  -DX_REFRESH
+
+	PLATFORM 	= $(shell uname -s -r) 64-bit
+
+	CC		= $(shell which gcc)
+	FC		= $(shell which gfortran)
+	F77		= $(shell which gfortran)
+	AR		= $(shell which ar)
+	RANLIB		= $(shell which ranlib)
+
+	ARFLAGS		= -cr
+
+# Flags for compiling all C code
+	CFLAGS		= -m64 -fPIC $(MYDEFINES) $(MYINCLUDES)
+
+# Flags for compiling the PlotPlus FORTRAN code (ppl subdirectory)
+	PPLUS_FFLAGS	= -m64 -fPIC \
+			  -fno-automatic \
+			  -fno-second-underscore \
+			  -fdollar-ok \
+			  -ffixed-line-length-132 \
+			  $(MYDEFINES) $(MYINCLUDES)
+
+# Flags for compiling non-PlotPlus FORTRAN code
+	FFLAGS		= -m64 -fPIC \
+			  -fno-automatic \
+			  -fno-second-underscore \
+			  -fdollar-ok \
+			  -ffixed-line-length-132 \
+			  -ffpe-trap=overflow \
+			  -fimplicit-none \
+			  -fdefault-real-8 \
+			  -fdefault-double-8 \
+			  $(MYDEFINES) $(MYINCLUDES)
+
+	OPT_FLAGS	= -O -DNDEBUG
+	PPLUS_OPT_FLAGS	= -O0
+	DBG_FLAGS	= -O0 -g
+	PROF_FLAGS	= -O0 -g -pg
+
+	# Below this line are macro definitions used only for the final linking of the executable
+
+	LD		= $(shell which gfortran)
+	LDFLAGS		= -m64 -static-libgfortran -export-dynamic
+
+# If $(READLINE_LIBDIR) is given (and not blank), statically link in the readline
+# and history libraries given under that directory; otherwise, just use the usual
+# flags to link in the system readline and history libraries.
+ifneq ($(strip $(READLINE_LIBDIR)),)
+	SYSLIB		= -lX11 \
+			  $(READLINE_LIBDIR)/libreadline.a \
+			  $(READLINE_LIBDIR)/libhistory.a \
+			  -lcurl \
+			  -ldl \
+			  -lz \
+			  -lm
+else
+	SYSLIB		= -lX11 \
+			  -lreadline \
+			  -lhistory \
+			  -lcurl \
+			  -ldl \
+			  -lz \
+			  -lm \
+			  -ljpeg
+endif
+
+# NetCDF4: either shared-object libraries (HDF5 and compression library
+# requirements recorded in NetCDF libraries) or static libraries (HDF5
+# and compression library requirements need to be specified).
+ifeq ($(strip $(HDF5_LIBDIR)),)
+	CDFLIB		= -L$(NETCDF_LIBDIR) \
+			  -lnetcdff \
+			  -lnetcdf
+else ifeq ($(strip $(SZ_LIBDIR)),)
+	CDFLIB		= $(NETCDF_LIBDIR)/libnetcdff.a \
+			  $(NETCDF_LIBDIR)/libnetcdf.a \
+			  $(HDF5_LIBDIR)/libhdf5_hl.a \
+			  $(HDF5_LIBDIR)/libhdf5.a
+else
+	CDFLIB		= $(NETCDF_LIBDIR)/libnetcdff.a \
+			  $(NETCDF_LIBDIR)/libnetcdf.a \
+			  $(HDF5_LIBDIR)/libhdf5_hl.a \
+			  $(HDF5_LIBDIR)/libhdf5.a \
+			  $(HDF4_LIBDIR)/libmfhdf.a \
+			  $(HDF4_LIBDIR)/libdf.a \
+			  $(SZ_LIBDIR)/libsz.a \
+			  $(SZ_LIBDIR)/libaec.a
+endif
+
+# Directly compile the .F source files to the .o object files
+# since gfortran can handle the C compiler directives in Fortran code
+%.o : %.F
+	$(FC) $(FFLAGS) -c $*.F -o $*.o
+
+#
+# End of platform_specific.mk.x86_64-linux
+#

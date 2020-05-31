@@ -46,3 +46,6 @@ functions written in Fortran) were moved to the `site_specific.mk.in` files.
 If you already have customized `site_specific.mk` files, please appropriately
 updated your customized files with these additional definitions.
 
+# About this distribution
+This fork is intended to maintain customisations to original Ferret distribution
+done within MPI-C. In case of any questions, contact Sergey Gromov (over GitHub)
