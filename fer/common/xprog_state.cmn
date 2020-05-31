@@ -67,7 +67,7 @@
 	INTEGER		cmnd_buff_len, max_qual_list, max_arg_list,
      .			max_item_list, max_modes, mode_stack_size,
      .			max_ifstk, mode_set_always
-	PARAMETER     ( cmnd_buff_len = 2048,
+	PARAMETER     ( cmnd_buff_len = 16384,
      .			max_qual_list = 60 ,	! increased from 50 3/12
      .			max_arg_list  = 128 ,	! was 20 pre-4/96
      .			max_item_list = 1000 ,

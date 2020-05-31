@@ -60,7 +60,7 @@
 	PARAMETER (pdset_dummy  = maxdsets + 1)	! dummy  (missing) dataset
 	PARAMETER (pdset_global = maxdsets + 2)	! global (phantom) dataset
 	PARAMETER (maxstepfiles = 5000)	! # of files with time step data (up from 500 12/02)
-	PARAMETER (maxvars = 2000)	! max # of ALL vars *parmchg: now
+	PARAMETER (maxvars = 10000)	! max # of ALL vars *parmchg: now
 	PARAMETER (maxvar2 = 2*maxvars)	! max # *2, for dimension equivalenced to real*8 arrays
 	PARAMETER (maxvarfiles = 500)	! # of files with time step data
 	PARAMETER (maxaux = 50)		! max # of ALL auxiliary sets

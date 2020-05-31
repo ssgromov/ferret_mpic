@@ -50,8 +50,8 @@
 
      	INTEGER	cmnd_copy_len
 C Matches cmnd_buff_len        
-	PARAMETER     ( cmnd_copy_len = 2048)
-	CHARACTER*2048 cmnd_copy
+	PARAMETER     ( cmnd_copy_len = 16384)
+	CHARACTER*16384 cmnd_copy
 
         CHARACTER*256 my_cbuff
 
