@@ -228,11 +228,11 @@
      .			uvar_text_len,
      .			max_intrp,
      .			max_rvar
-	PARAMETER     (	max_uvar      	  = 2000,! total # uvars incl. "EX#."
-     .			max_uvar_items    =  200,! complexity of uvar expression
-     .			uvar_text_len	  = 2048,! max length of uvar expression
-     .			max_intrp	  =  400 ,! max depth of interp stack
-     .			max_rvar	  = 2000  )
+	PARAMETER     (	max_uvar      	  = 10000,! total # uvars incl. "EX#."
+     .			max_uvar_items    =   500,! complexity of uvar expression
+     .			uvar_text_len	  = 16387,! max length of uvar expression
+     .			max_intrp	  =   500,! max depth of interp stack
+     .			max_rvar	  = 10000 )
 
 ********************************************************************************
 ******				COMMON DECLARATION			  ******
