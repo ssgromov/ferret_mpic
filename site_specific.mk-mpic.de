@@ -74,7 +74,7 @@ SZ_LIBDIR =
 # NETCDF_LIBDIR = /usr/local/lib
 # NETCDF_LIBDIR = /usr/lib64
 # NETCDF_LIBDIR = /usr/lib
-NETCDF_LIBDIR = $(NETCDF_HOME)/lib64
+NETCDF_LIBDIR = $(NETCDF_ROOT)/lib
 
 ## =========================
 ## Directory containing the (GNU) readline static libraries.

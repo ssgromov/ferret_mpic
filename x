@@ -6,7 +6,7 @@ set dom = `hostname -d`
 
 switch ($dom)
   case mpic.de:
-    module load gcc/7.3.1
+   #module load gcc/7.3.1
     module load hdf5/1.8.14/gcc/5.3.1
     module load netcdf/4.6.2
     breaksw

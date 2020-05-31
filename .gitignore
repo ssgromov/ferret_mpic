@@ -8,3 +8,5 @@ site_specific.mk
 
 *.gksfont
 xgks/**
+bin/build_fonts/unix/*.chr
+bin/build_fonts/unix/*.sym
